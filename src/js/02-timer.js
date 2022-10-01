@@ -4,6 +4,7 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const btnStart = document.querySelector('button[data-start]');
 const input = document.querySelector('input');
+const timer = document.querySelector(".timer");
 const daysEl = document.querySelector("span[data-days]");
 const hoursEl = document.querySelector("span[data-hours]");
 const minutesEl = document.querySelector("span[data-minutes]");
@@ -26,9 +27,10 @@ const options = {
         } else {
             btnStart.removeAttribute('disabled');
        }
-    console.log(selectedDates[0]);
+    // console.log(selectedDates[0]);
   },
 };
+
 flatpickr("#datetime-picker", options); 
 
 btnStart.addEventListener('click', timerStart);
@@ -38,8 +40,8 @@ function timerStart() {
     btnStart.setAttribute("disabled", true);
     intervalId = setInterval(() => {const deadline = new Date(input.value);
     const delta = deadline - Date.now();
-    console.log(deadline);
-    console.log(delta);
+    // console.log(deadline);
+    // console.log(delta);
         if (delta < 1000) {
             clearInterval(intervalId);
 Notify.success("Час вийшов...)", notifyOptions);
@@ -50,7 +52,7 @@ Notify.success("Час вийшов...)", notifyOptions);
     
 }
 
-function convertMs(ms) {
+function convertMs(delta) {
   // Number of milliseconds per unit of time
   const second = 1000;
   const minute = second * 60;
@@ -58,13 +60,13 @@ function convertMs(ms) {
   const day = hour * 24;
 
   // Remaining days
-  const days = addLeadinZero(Math.floor(ms / day));
+  const days = addLeadinZero(Math.floor(delta / day));
   // Remaining hours
-  const hours = addLeadinZero(Math.floor((ms % day) / hour));
+  const hours = addLeadinZero(Math.floor((delta % day) / hour));
   // Remaining minutes
-  const minutes = addLeadinZero(Math.floor(((ms % day) % hour) / minute));
+  const minutes = addLeadinZero(Math.floor(((delta % day) % hour) / minute));
   // Remaining seconds
-  const seconds = addLeadinZero(Math.floor((((ms % day) % hour) % minute) / second));
+  const seconds = addLeadinZero(Math.floor((((delta % day) % hour) % minute) / second));
 
   return { days, hours, minutes, seconds };
 }
@@ -78,3 +80,7 @@ function showTime({ days, hours, minutes, seconds }) {
     minutesEl.textContent = minutes;
     secondsEl.textContent = seconds;
 }
+timer.style.display = 'flex';
+timer.style.justifyContent = 'space-evenly';
+timer.style.marginTop = '40px';
+timer.style.fontSize = '30px';
