@@ -76,7 +76,7 @@ function addLeadinZero(value) {
 function showTime({ days, hours, minutes, seconds }) {
 
     daysEl.textContent = days;
-    hoursEl.textContents = hours;
+    hoursEl.textContent = hours;
     minutesEl.textContent = minutes;
     secondsEl.textContent = seconds;
 }
