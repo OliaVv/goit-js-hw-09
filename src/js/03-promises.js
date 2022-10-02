@@ -1,13 +1,5 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-function createPromise(position, delay) {
-  const shouldResolve = Math.random() > 0.3;
-  if (shouldResolve) {
-    // Fulfill
-  } else {
-    // Reject
-  }
-}
 const form = document.querySelector("form");
 const delayEl = document.querySelector("input[name='delay']");
 const stepEl = document.querySelector("input[name='step']");
