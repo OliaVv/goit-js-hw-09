@@ -39,10 +39,11 @@ function timerStart() {
     Notify.success("Стартуємо :-)", notifyOptions);
     btnStart.setAttribute("disabled", true);
     intervalId = setInterval(() => {const deadline = new Date(input.value);
-    const delta = deadline - Date.now();
+      const delta = deadline - Date.now();
     // console.log(deadline);
     // console.log(delta);
-        if (delta < 1000) {
+      if (delta < 0) {
+        
             clearInterval(intervalId);
 Notify.success("Час вийшов...)", notifyOptions);
         } else {

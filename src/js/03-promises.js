@@ -25,15 +25,20 @@ const step = Number(stepEl.value);
         Notify.success(`Fulfilled promise ${position} in ${delay}ms`, notifyOptions)})
       .catch(({ position, delay }) => {
         Notify.failure(`Rejected promise ${position} in ${delay}ms`, notifyOptions)})
-      delay += step;
+    delay += step;
   } 
   event.currentTarget.reset();
-  }
+}
+
   function createPromise(position, delay) {
     const shouldResolve = Math.random() > 0.3;
     return new Promise ((resolve, reject) => {
-    setTimeout(() => {
-      if(shouldResolve) {
+      setTimeout(() => {
+        if (delay < 0) {
+          Notify.failure('Задайте позитивне значення', notifyOptions)
+          return;
+        }
+        if (shouldResolve) {
         resolve({position, delay})
       } else {
         reject({position, delay});
